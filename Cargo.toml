@@ -1,0 +1,16 @@
+[package]
+name = "sdat2img"
+version = "1.2.0"
+edition = "2021"
+rust-version = "1.88"
+description = "Convert Android sparse data image (.dat) to a filesystem image (.img) — Rust port of xpirt/sdat2img"
+license = "MIT"
+
+[[bin]]
+name = "sdat2img"
+path = "src/main.rs"
+
+[profile.release]
+lto = true
+codegen-units = 1
+strip = true
