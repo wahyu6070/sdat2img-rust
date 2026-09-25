@@ -6,6 +6,26 @@ A Rust port of [sdat2img](https://github.com/xpirt/sdat2img) by xpirt, luxi78 an
 - Its output is byte-for-byte identical to `sdat2img.py` 1.2, and it produces the same sparse files.
 - It builds to a single fast binary, so you don't need Python.
 
+## Download
+
+Prebuilt binaries are on the [Releases](https://github.com/wahyu6070/sdat2img-rust/releases) page. Each zip has one folder per architecture:
+
+| File                   | Architectures                                                  |
+|------------------------|----------------------------------------------------------------|
+| `sdat2img-linux.zip`   | `arm`, `arm64`, `x86`, `x86_64` (static, no dependencies)      |
+| `sdat2img-android.zip` | `arm`, `arm64`, `x86`, `x86_64` (Android 5.0+ / API 21)        |
+| `sdat2img-windows.zip` | `x86`, `x86_64`, `arm64` (Windows 10+)                         |
+
+32-bit ARM Windows has no build because Rust has no usable target for it.
+
+To run the Android binary on a device (with adb or Termux):
+
+```sh
+adb push arm64/sdat2img /data/local/tmp/
+adb shell chmod 755 /data/local/tmp/sdat2img
+adb shell /data/local/tmp/sdat2img system.transfer.list system.new.dat system.img
+```
+
 ## Build
 
 You need [Rust](https://rustup.rs) 1.88 or newer.
@@ -20,6 +40,25 @@ To install the binary into `~/.cargo/bin`:
 ```sh
 cargo install --path .
 ```
+
+### Cross-compiling
+
+`build.sh` builds every release target and packages them into `dist/sdat2img-<os>.zip` plus `dist/SHA256SUMS`:
+
+```sh
+./build.sh            # all targets
+./build.sh linux      # only Linux (also: android, windows)
+./build.sh linux-arm64 windows-x86_64
+./build.sh --list     # show all targets
+```
+
+It needs:
+
+- [zig](https://ziglang.org/download/) and [cargo-zigbuild](https://github.com/rust-cross/cargo-zigbuild) (`cargo install --locked cargo-zigbuild`) for the Linux and Windows targets.
+- The [Android NDK](https://developer.android.com/ndk/downloads) for the Android targets. Set `ANDROID_NDK_HOME` or extract it into `~/Android`.
+- `zip`.
+
+The script installs missing Rust targets on its own.
 
 ## Usage
 
