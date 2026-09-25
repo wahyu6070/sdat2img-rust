@@ -4,7 +4,7 @@ A Rust port of [sdat2img](https://github.com/xpirt/sdat2img) by xpirt, luxi78 an
 
 - It has no external dependencies and uses only `std`.
 - Its output is byte-for-byte identical to `sdat2img.py` 1.2, and it produces the same sparse files.
-- It builds to a single fast static binary, so you don't need Python.
+- It builds to a single fast binary, so you don't need Python.
 
 ## Build
 

@@ -17,3 +17,7 @@ Rust port of [xpirt/sdat2img](https://github.com/xpirt/sdat2img) (`sdat2img.py` 
 - No external dependencies (std only) unless there's a strong reason.
 - Output must stay byte-identical to `sdat2img.py` for valid input. Check behavior changes against the original.
 - Before committing, run `cargo fmt`, `cargo clippy --all-targets` (it must report zero warnings) and `cargo test`.
+
+## Git workflow
+
+- Work directly on `main`. After every change, commit and **always push to `origin main`** (`git@github.com:wahyu6070/sdat2img-rust.git`). Don't create feature branches unless asked.
